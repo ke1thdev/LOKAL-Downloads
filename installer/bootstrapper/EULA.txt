@@ -1,0 +1,134 @@
+LOKAL THESIS PROJECT SOFTWARE LICENSE AGREEMENT
+
+License revision 1.0 - August 2026
+
+INSTALLATION SUMMARY
+
+This setup checks the computer and installs only components that are missing
+or need an update:
+
+  - LOKAL classroom server
+  - LOKAL Microsoft PowerPoint add-in
+  - LOKAL Server Status tray application
+  - Microsoft .NET Framework 4.8, only if missing
+  - Microsoft Visual Studio Tools for Office Runtime, only if missing
+
+OFFLINE INSTALLATION: All LOKAL files, Microsoft .NET Framework 4.8, and the
+Visual Studio Tools for Office Runtime are included in this installer. Internet
+is not required to install. Internet is needed only to obtain future installer
+updates or use LOKAL online features. Microsoft PowerPoint must already be
+installed. Save and close PowerPoint before continuing.
+
+IMPORTANT: PLEASE READ THIS AGREEMENT CAREFULLY BEFORE INSTALLING OR USING
+LOKAL. BY SELECTING "I AGREE" OR BY INSTALLING OR USING LOKAL, YOU ACCEPT
+THE TERMS OF THIS AGREEMENT. IF YOU DO NOT ACCEPT THEM, DO NOT INSTALL OR USE
+THE SOFTWARE.
+
+1. PROJECT IDENTITY AND AUTHORS
+
+LOKAL is an academic thesis software project developed by:
+
+  - Keith Renz D. Romblon
+  - Camille R. Ramilo
+
+The software includes a local or hybrid classroom server, browser-based
+teacher and student interfaces, and a Microsoft PowerPoint add-in. LOKAL is
+an independent academic project. It is not affiliated with, endorsed by, or
+sponsored by Microsoft, ClassPoint, or any other third-party product named in
+supporting research or documentation.
+
+2. LICENSE GRANT
+
+Subject to this Agreement, the developers grant the user a limited,
+non-exclusive, non-transferable, revocable license to install and use LOKAL
+for academic evaluation, research, demonstration, and lawful classroom use.
+No ownership interest or intellectual-property right is transferred.
+
+3. PERMITTED USE
+
+The user may install LOKAL on computers the user owns or is authorized to
+manage; operate classroom sessions; store classroom data locally; and use
+online or local-network features provided by the installed configuration.
+
+4. RESTRICTIONS
+
+Except where applicable law expressly permits otherwise, the user may not:
+
+  a. sell, sublicense, rent, lease, or commercially redistribute LOKAL;
+  b. remove or obscure the project name, authorship, copyright, or license
+     notices;
+  c. reverse engineer, decompile, or bypass technical safeguards in LOKAL;
+  d. use LOKAL to violate privacy, intellectual-property, computer-misuse,
+     education, or data-protection laws; or
+  e. represent LOKAL as an official product of Microsoft, ClassPoint, or any
+     third party.
+
+5. CLASSROOM DATA, PRIVACY, AND BACKUPS
+
+LOKAL may process names, responses, scores, uploaded content, class codes,
+and related classroom records. The teacher or system administrator is
+responsible for obtaining any required consent, limiting access to authorized
+participants, selecting a lawful operating mode, protecting credentials and
+class codes, and maintaining appropriate backups. Enabling network or online
+operation can transmit data between devices. The developers do not control
+the user's network, hosting provider, security configuration, or data-retention
+practices.
+
+6. LOCAL SERVER AND NETWORK SECURITY
+
+LOKAL can install a local server and can be configured for device-only, local
+network, or online operation. The user or administrator is responsible for
+firewall rules, router and hosting configuration, TLS certificates, software
+updates, physical security, and preventing unauthorized Internet exposure.
+
+7. THIRD-PARTY SOFTWARE
+
+LOKAL may interoperate with Microsoft PowerPoint and may include or rely on
+third-party runtimes, libraries, fonts, media, or operating-system services.
+Those items remain subject to their respective licenses and terms. Microsoft
+PowerPoint and the Visual Studio Tools for Office Runtime may be required for
+PowerPoint add-in functionality.
+
+8. ACADEMIC AND DEVELOPMENT STATUS
+
+LOKAL is a thesis project and may contain experimental or incomplete
+functionality. Features, storage formats, network behavior, and compatibility
+may change during development. The user should test the system before relying
+on it in a live class.
+
+9. NO WARRANTY
+
+TO THE MAXIMUM EXTENT PERMITTED BY LAW, LOKAL IS PROVIDED "AS IS" AND "AS
+AVAILABLE," WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, ACCURACY, AVAILABILITY,
+SECURITY, AND NON-INFRINGEMENT. THE DEVELOPERS DO NOT WARRANT THAT THE
+SOFTWARE WILL BE ERROR-FREE OR THAT DATA WILL NEVER BE LOST.
+
+10. LIMITATION OF LIABILITY
+
+TO THE MAXIMUM EXTENT PERMITTED BY LAW, KEITH RENZ D. ROMBLON AND CAMILLE R.
+RAMILO WILL NOT BE LIABLE FOR INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL,
+EXEMPLARY, OR PUNITIVE DAMAGES, OR FOR LOSS OF DATA, CLASS TIME, REVENUE,
+PROFITS, OR GOODWILL ARISING FROM THE INSTALLATION OR USE OF LOKAL. NOTHING IN
+THIS AGREEMENT EXCLUDES LIABILITY THAT CANNOT LAWFULLY BE EXCLUDED.
+
+11. TERMINATION
+
+This license terminates automatically if the user materially violates this
+Agreement. On termination, the user must stop using LOKAL and uninstall the
+software, subject to any lawful archival or academic-record requirements.
+
+12. GOVERNING LAW AND SEVERABILITY
+
+This Agreement is governed by the laws of the Republic of the Philippines,
+without regard to conflict-of-law rules. If a provision is held invalid or
+unenforceable, the remaining provisions continue in effect.
+
+13. ENTIRE AGREEMENT
+
+This Agreement is the entire agreement between the user and the developers
+concerning the licensed installation of LOKAL and supersedes prior statements
+about that subject. Changes must be provided in writing by the developers.
+
+Copyright (c) 2026 Keith Renz D. Romblon and Camille R. Ramilo.
+All rights reserved.

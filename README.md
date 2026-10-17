@@ -11,7 +11,7 @@
 **Teach from PowerPoint. Let students participate from their browsers.**<br />
 An offline-first classroom response, presentation, and engagement system.
 
-[Download for Windows](https://github.com/ke1thdev/LOKAL-Downloads/releases) · [Getting started](#getting-started) · [Visual tour](#powerpoint-ribbon) · [Reports](#reports-and-rewards) · [Help and feedback](#help-and-feedback)
+[Download for Windows](https://github.com/ke1thdev/LOKAL-Downloads/releases) · [What's new](#whats-new-since-v10213) · [Getting started](#getting-started) · [Visual tour](#powerpoint-ribbon) · [Experimental AI](#experimental-local-ai-summaries-windows) · [Help and feedback](#help-and-feedback)
 
 <img src="assets/open-graph.jpg" alt="LOKAL brings interactive activities to PowerPoint over a local classroom network" width="100%" />
 
@@ -29,8 +29,12 @@ LOKAL also includes presentation annotations, whiteboards, a name picker, quick 
 
 This repository is for **public downloads and product documentation**. The Windows setup EXE is distributed through Releases. This is not the development codebase; classroom databases, credentials, student exports, private diagnostics, and development/test files should not be uploaded here.
 
+> [!WARNING]
+> **Local AI Summary is experimental in v1.0.221.** It has not been fully tested across different computers, model files, graphics cards, and Windows-service configurations. Model checks or generation can fail, time out, produce an unacceptable draft, or encounter bugs. GPU acceleration is also experimental and has not been verified on dedicated-GPU hardware. AI is optional and off by default; use the recorded report as the source of truth and review every generated summary.
+
 ### Explore this guide
 
+- [What's new since v1.0.213](#whats-new-since-v10213)
 - [Features at a glance](#features-at-a-glance)
 - [Downloads and requirements](#downloads-and-requirements)
 - [Getting started](#getting-started)
@@ -42,12 +46,34 @@ This repository is for **public downloads and product documentation**. The Windo
 - [Reset tools](#reset-tools)
 - [Teacher dashboard](#teacher-dashboard)
 - [Reports and rewards](#reports-and-rewards)
+- [Experimental local AI summaries](#experimental-local-ai-summaries-windows)
 - [Student experience](#student-experience)
 - [Server status and connectivity](#server-status-and-connectivity)
 - [Help, About, and common questions](#help-and-feedback)
 - [Privacy, authors, and license](#privacy-and-responsible-use)
 
 > **About the visuals:** interface captures use fictional demonstration data. Native captures are rendered window/component previews without the surrounding Office desktop; some show selected option details rather than every control, and native window-region geometry may differ in a render. Ribbon/menu command guides are explicitly labeled illustrations, not screenshots. They explain the current commands without showing a real teacher account, classroom roster, or network address. Layout can vary with the installed version, screen size, and display scaling.
+
+## What's new since v1.0.213
+
+The following is a cumulative overview through **v1.0.221**; these changes were introduced across several updates, not all in one release. The detailed feature tour remains below.
+
+| Area | Added or improved |
+|---|---|
+| Optional local AI summaries — **experimental** | Enable AI per teacher, import a compatible GGUF model, and request a locally generated recap from a saved Class Report. No cloud AI service, automatic model download, or bundled model is required. |
+| Custom models and processing | Compatible self-contained GGUF text-generation models are no longer restricted to one Qwen filename. Choose Automatic, CPU only, or GPU only; Vulkan GPU processing remains experimental. |
+| Model setup and storage | Actual-size chunked upload progress, load-only processor preparation, clearer setup errors, and replacement cleanup. Successfully replaced private copies are removed only when no other teacher uses them. |
+| AI report experience | Flexible model-written paragraphs, readable white cards, responsive controls, Philippine-time generation dates, and Generate/Regenerate/Cancel/Retry actions. Processor setup details stay in Settings. |
+| Failure visibility in v1.0.221 | A failed regeneration now shows its latest safe error instead of being hidden by a generic “Summary needs updating” message. A still-current valid recap is preserved; outdated prose stays hidden. |
+| AI and classroom coexistence | Stale disconnected activity flags no longer block model setup as though a presenter were collecting responses. Genuine live collection still takes priority over AI work. |
+| Word Cloud moderation | Hiding a word removes it from the presented cloud without deleting its original submission or credited stars. Reports and relevant Excel exports mark it **Hidden from cloud**. |
+| Saved report images | Report-owned response images and slide snapshots no longer expire merely because a session is old, inactive, or not favorited. Explicit reset/deletion can still remove media. |
+| Session star accuracy | Older report-detail views use the selected session's rewards rather than a student's accumulated class balance. Session totals and lifetime leaderboard totals remain separate. |
+| Windows installation | One main **LOKAL Setup** entry in Installed Apps, with supporting components managed by the combined installer. |
+
+**Current documented build:** Setup **1.0.221.0** · Server **1.0.163.0** · PowerPoint add-in **1.0.182.0** · Server Status **1.0.99.0**.
+
+Build/package checks and synthetic classroom/UI regressions passed for this build. That is **not** a claim of error-free operation, universal model support, dedicated-GPU validation, or completed real-model AI acceptance. Check the [release notes](https://github.com/ke1thdev/LOKAL-Downloads/releases) and pilot the update on your own hardware before relying on it in class.
 
 ## Features at a glance
 
@@ -61,12 +87,15 @@ This repository is for **public downloads and product documentation**. The Windo
 | Presentation tools | Annotate with pen, highlighter, shapes, and text; add whiteboards and move configured draggable objects. |
 | Teacher dashboard | Manage classes, participants, groups, activities, reports, account information, and settings. |
 | Reporting | Review session/activity details and download auto-scored, teacher-reviewed, complete, activity, and leaderboard Excel reports. |
+| Experimental local AI | Optionally generate a report recap on the Windows host using a compatible imported GGUF model; no cloud AI calls. |
 | Local operation | Conduct classroom sessions over a reachable LAN without relying on a hosted server. |
 | Optional connected features | Use configured online access and local-to-cloud synchronization when suitable infrastructure and internet connectivity are available. |
 
 ## Downloads and requirements
 
 Download **LOKAL-Setup-x64.exe** from the [LOKAL release assets](https://github.com/ke1thdev/LOKAL-Downloads/releases).
+
+For **v1.0.221**, AI writing acceptance remains pending. Treat it as an experimental release candidate, not a fully validated AI release. Ordinary classroom use does not require enabling AI or downloading a model.
 
 | Component | Included in the Windows setup |
 |---|---|
@@ -202,7 +231,7 @@ Use it to gather prior knowledge, keywords, ideas, reflections, and short phrase
 - The cloud reflows as answers change, keeping the display readable.
 - Toggle **Highlight top answer** to emphasize the most frequent entry or entries tied for the top frequency.
 - Click a word to view its submitters and award/decrease stars.
-- Right-click a word to remove it with confirmation; moderation is reflected in the recorded report.
+- Right-click a word to hide it from the cloud with confirmation. Original submissions and awarded stars remain in teacher reports and Excel exports, with hidden words clearly marked.
 - Insert collected results as a slide.
 
 Word Cloud does not use an automatic answer key or automatic correctness rewards.
@@ -607,6 +636,7 @@ This is a review library—not a browser-based slide or quiz builder. Prepare sl
 | Connection | View/select the operating mode and joining/dashboard addresses; manage configured online/sync connection details. Listener changes may require a server restart. |
 | Star Levels | Edit star requirements, add/remove supported levels, and use supplied badge artwork. |
 | Whiteboard Backgrounds | Upload, preview, and remove supported custom backgrounds for the PowerPoint whiteboard picker. |
+| Local AI Summary — experimental, Windows only | Enable/disable AI for your teacher account, import/replace/remove a compatible model on the host, select a processing mode, and check the processor. See [setup and limitations](#experimental-local-ai-summaries-windows). |
 
 The Notifications area is currently an **available-soon placeholder**, not an implemented notification-preference system.
 
@@ -665,6 +695,60 @@ Deductions affect net reward totals. **Within response review**, manual deductio
 - Excel star-history sheets: award source and committed changes, including deductions where applicable.
 
 Manual review supports opening words, full text, and images. Names hidden in a presentation/review are still associated with stored records, and exports include participant names.
+
+### Experimental local AI summaries (Windows)
+
+An optional **AI Summary** card sits below the Class Report statistics and above Activities. It can turn the recorded session figures into a friendly, conversational recap, with the model choosing its wording, order, and one-to-six-paragraph arrangement. Tone, detail, accuracy, and usefulness vary by model; a ClassPoint-identical result or successful generation is not guaranteed.
+
+> [!IMPORTANT]
+> **Experimental, not fully validated across devices.** Bugs, compatibility failures, slow processing, timeouts, rejected drafts, and incorrect wording remain possible. Current-runner Windows-service AI acceptance and dedicated-GPU testing remain incomplete. Keep AI disabled if it does not work reliably on your computer. It is not an assessment engine, attendance tracker, or substitute for teacher review.
+
+#### Enable and try it
+
+1. On the **computer hosting LOKAL**, sign in to the teacher page through its localhost address.
+2. Open **Settings → Local AI Summary** and enable it for your teacher account. It is **off by default**.
+3. Download a self-contained, instruction-tuned GGUF text-generation model yourself. Review its publisher, license, hardware needs, and chat-template support. Start small; a larger model is not automatically a better fit for your laptop.
+4. Close all quiz submissions, then use **Upload model**. The selected filename is information, not the upload button. Progress reflects the actual file size; file verification and processor preparation follow separately.
+5. Choose **Automatic**, **CPU only**, or **GPU only**, save the preference, and use **Check processor** if prompted. A check loads the model/context and evaluates a short synthetic input—it **does not generate a sample report**.
+6. Open a saved Class Report and select **Generate summary**. Actual writing and factual/format checks happen here. Use Cancel, Retry, or Regenerate as appropriate, and review the result against the official report.
+
+No summary is generated automatically. Import, replacement, removal, and processor checks require an authenticated **direct-localhost** session on the host; signing in from another device does not grant model-management access. Once configured, authorized teacher devices can request a summary, but computation still runs on the host, not the phone viewing the report. Local AI currently requires the Windows host's **local SQLite storage** and is unavailable on Linux or a Windows server using a hosted PostgreSQL database.
+
+#### Model files and replacement
+
+- **Compatible GGUF does not mean any LLM.** Gemma, Llama, Qwen, and other text-generation families are not blocked just because of their names, but each exact file must be supported by the bundled runtime, include a usable embedded chat template, fit memory limits, and pass the isolated load check. Passing that check does not guarantee a valid summary.
+- Import accepts one complete `.gguf` file up to **64 GiB**. This is an upload ceiling, **not** a recommended model size or a promise your device can run it. Split models, external adapters/templates, vision projectors, embedding-only models, and unsupported architectures are not accepted.
+- Keep enough disk space for the staged upload while retaining the working model, plus at least **1 GiB free-space reserve**. RAM and GPU memory are checked separately; model-file size alone does not establish that it will fit.
+- A successful replacement switches your model reference, then reclaims the previous **managed copy** only when no other teacher references it. Failed replacement preserves the previous selection. Remove model also respects shared references. LOKAL does **not** delete the original downloaded file you selected.
+- Previously imported models may need a new **Check processor**, rather than another upload, after a runtime update.
+
+#### CPU and experimental GPU processing
+
+| Mode | Behavior |
+|---|---|
+| Automatic | Prefers a locally checked compatible Vulkan GPU; may use a checked CPU path when GPU execution is unavailable. Only eligible GPU-device failures permit a bounded CPU fallback. |
+| CPU only | No GPU offload. Speed depends on the host CPU, available RAM, model, and other work on that computer. |
+| GPU only — experimental | Requires a successful local Vulkan/offload check. Does not silently switch to CPU. Drivers and available memory can prevent execution. |
+
+GPU detection is not proof of compatibility. Dedicated-GPU behavior has **not been verified on dedicated hardware** for this build, and no measured GPU speedup or universal NVIDIA/AMD/Intel support is promised. Hardware/setup messages belong in **Settings**, not a large processor panel in Reports. A completed recap retains compact information about the model/backend actually used and its generation date in **Philippine Standard Time**.
+
+#### Report data, privacy, and classroom priority
+
+The model receives a minimized set of recorded report totals: saved responses, recorded activities/contributors, activity-type counts and response ranges, applicable correctness figures, net reward-source totals, and up to five eligible reward leaders' names with rank/tie context. Names can be personal data even when processed locally; use the feature only under your institution's data-handling rules.
+
+Raw answers, questions, uploaded images, captions, emails, credentials, and participant-device information are **not** provided. The worker runs locally in a restricted, zero-network Windows environment without database access. The installer includes the runtime, **not model weights**; LOKAL does not automatically download a model or call cloud AI services. These safeguards reduce risk; they are not a security certification of arbitrary downloaded files.
+
+Only one AI operation runs at a time, with bounded resources and a **five-minute deadline**. Open submissions block AI work; starting or reopening a quiz cancels unfinished AI generation so classroom work takes priority. Durable flags left by a disconnected presenter are not treated as proof of live collection. You do not need to close PowerPoint merely to configure AI if no activity is genuinely collecting responses.
+
+#### Read results and errors correctly
+
+LOKAL checks generated structure and detectable mistakes in numbers, names, ranks, ties, and reward claims before saving. A model can pass the load check yet produce a rejected draft. Rejection is **not** proof of broken hardware, and a successful check is **not** proof that its writing is accurate. The **v1.0.221** status fix keeps the latest safe failure visible instead of silently reverting to “Summary needs updating.”
+
+Summaries become outdated when relevant report data or AI configuration changes. Outdated prose stays hidden and can be regenerated. If a previous recap is still current, a failed regeneration leaves that valid recap available with the new error; a rejected draft does not replace it. Disabling AI cancels your unfinished job while retaining the model reference and saved recaps.
+
+AI prose can still contain errors or awkward wording. Stars are rewards, not automatically correctness scores; students with recorded responses **or** awards are not a verified attendance list. The report's official figures remain authoritative. Summaries are saved separately from assessment records, remain local, and are **not included in Excel exports or cloud synchronization**.
+
+Every displayed recap includes: **“AI-generated from recorded report data. Review against the report.”**
 
 ### Excel and CSV downloads
 
@@ -806,6 +890,13 @@ Capacity depends on the teacher computer, network quality, activity type, image 
 </details>
 
 <details>
+<summary>Do I need an AI model to use LOKAL?</summary>
+
+No. AI is an optional, experimental Windows feature and is off by default. You can run quizzes, award stars, review reports, and export Excel files without importing a model. To try AI, use Settings on the host computer and start with a small compatible GGUF; see the experimental AI section above.
+
+</details>
+
+<details>
 <summary>Are names hidden permanently when anonymous display is enabled?</summary>
 
 No. It masks the supported presentation/review view; identity linkage remains in saved records and named exports. Written responses, captions, and images can also identify their authors.
@@ -821,6 +912,8 @@ For non-sensitive bugs, [open a LOKAL issue](https://github.com/ke1thdev/LOKAL-D
 - Expected behavior and what actually happened.
 - A fictional/anonymized example or screenshot.
 
+For an AI issue, also include the model's public filename/source, selected processing mode, available RAM, GPU/driver if relevant, elapsed time, and the safe error code shown by LOKAL. Do not post the generated recap if it contains student names or other private data. Hardware details help diagnose an issue; they are not sent to the summary model as report content.
+
 Do not upload real student reports, databases, private diagnostics, recovery codes, tokens, passwords, or private keys. Use an established private channel for sensitive security reports; do not publish exploit details or credentials in a public issue.
 
 ## Privacy and responsible use
@@ -833,7 +926,7 @@ LOKAL can store participant identities, avatars, answers, uploaded images, respo
 - Restrict access to the teacher computer and reports.
 - Consider device encryption for protection if a computer is lost or stolen.
 - Treat exported named reports as private classroom records.
-- Remember that favorites and retention settings can affect how long report media is retained.
+- Report snapshots and submitted images remain available while their activity and session exist, regardless of age or favorites. Explicit report/activity deletion or response reset can remove their media; back up the database and uploads together.
 
 LOKAL is an academic project. Review the release notes and evaluate it in your environment before consequential assessments. No README claim replaces a classroom pilot, a backup, or an independent security review.
 

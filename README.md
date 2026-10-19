@@ -4,6 +4,8 @@
 
 # LOKAL
 
+**Release v1.0.225 · 20 October 2026**
+
 ### Your PowerPoint. A more interactive classroom.
 
 [![README views](https://hits.sh/github.com/ke1thdev/LOKAL-Downloads.svg?label=README%20views&color=0d9488&labelColor=0b1f1c)](https://hits.sh/github.com/ke1thdev/LOKAL-Downloads/)
@@ -11,7 +13,7 @@
 **Teach from PowerPoint. Let students participate from their browsers.**<br />
 An offline-first classroom response, presentation, and engagement system.
 
-[Download for Windows](https://github.com/ke1thdev/LOKAL-Downloads/releases) · [What's new](#whats-new-since-v10213) · [Getting started](#getting-started) · [Visual tour](#powerpoint-ribbon) · [Experimental AI](#experimental-local-ai-summaries-windows) · [Help and feedback](#help-and-feedback)
+[Download for Windows](https://github.com/ke1thdev/LOKAL-Downloads/releases) · [What's new](#whats-new-since-v10221) · [Getting started](#getting-started) · [Visual tour](#powerpoint-ribbon) · [Experimental AI](#experimental-local-ai-summaries-windows) · [Help and feedback](#help-and-feedback)
 
 <img src="assets/open-graph.jpg" alt="LOKAL brings interactive activities to PowerPoint over a local classroom network" width="100%" />
 
@@ -30,11 +32,11 @@ LOKAL also includes presentation annotations, whiteboards, a name picker, quick 
 This repository is for **public downloads and product documentation**. The Windows setup EXE is distributed through Releases. This is not the development codebase; classroom databases, credentials, student exports, private diagnostics, and development/test files should not be uploaded here.
 
 > [!WARNING]
-> **Local AI Summary is experimental in v1.0.221.** It has not been fully tested across different computers, model files, graphics cards, and Windows-service configurations. Model checks or generation can fail, time out, produce an unacceptable draft, or encounter bugs. GPU acceleration is also experimental and has not been verified on dedicated-GPU hardware. AI is optional and off by default; use the recorded report as the source of truth and review every generated summary.
+> **Local AI Summary remains experimental in v1.0.225.** It now runs in the browser through Transformers.js and ONNX Runtime Web, using a separate verified model pack. Real browser/GPU compatibility still requires testing on your devices. AI is optional and off by default on a fresh setup; recorded report figures remain the source of truth.
 
 ### Explore this guide
 
-- [What's new since v1.0.213](#whats-new-since-v10213)
+- [What's new since v1.0.221](#whats-new-since-v10221)
 - [Features at a glance](#features-at-a-glance)
 - [Downloads and requirements](#downloads-and-requirements)
 - [Getting started](#getting-started)
@@ -52,28 +54,28 @@ This repository is for **public downloads and product documentation**. The Windo
 - [Help, About, and common questions](#help-and-feedback)
 - [Privacy, authors, and license](#privacy-and-responsible-use)
 
-> **About the visuals:** interface captures use fictional demonstration data. Native captures are rendered window/component previews without the surrounding Office desktop; some show selected option details rather than every control, and native window-region geometry may differ in a render. Ribbon/menu command guides are explicitly labeled illustrations, not screenshots. They explain the current commands without showing a real teacher account, classroom roster, or network address. Layout can vary with the installed version, screen size, and display scaling.
+> **About the visuals:** interface captures use fictional demonstration data. Native captures are rendered window/component previews without the surrounding Office desktop; some show selected option details rather than every control, and native window-region geometry may differ in a render. Ribbon/menu command guides are explicitly labeled illustrations, not screenshots. They explain the commands without showing a real teacher account, classroom roster, or network address. Some captures are from earlier builds; follow the current text for Settings and AI setup. Layout can vary with the installed version, screen size, and display scaling.
 
-## What's new since v1.0.213
+## What's new since v1.0.221
 
-The following is a cumulative overview through **v1.0.221**; these changes were introduced across several updates, not all in one release. The detailed feature tour remains below.
+This is the cumulative update from the previous public release, **v1.0.221**, through **v1.0.225**.
 
-| Area | Added or improved |
+| Area | Updated in this release series |
 |---|---|
-| Optional local AI summaries — **experimental** | Enable AI per teacher, import a compatible GGUF model, and request a locally generated recap from a saved Class Report. No cloud AI service, automatic model download, or bundled model is required. |
-| Custom models and processing | Compatible self-contained GGUF text-generation models are no longer restricted to one Qwen filename. Choose Automatic, CPU only, or GPU only; Vulkan GPU processing remains experimental. |
-| Model setup and storage | Actual-size chunked upload progress, load-only processor preparation, clearer setup errors, and replacement cleanup. Successfully replaced private copies are removed only when no other teacher uses them. |
-| AI report experience | Flexible model-written paragraphs, readable white cards, responsive controls, Philippine-time generation dates, and Generate/Regenerate/Cancel/Retry actions. Processor setup details stay in Settings. |
-| Failure visibility in v1.0.221 | A failed regeneration now shows its latest safe error instead of being hidden by a generic “Summary needs updating” message. A still-current valid recap is preserved; outdated prose stays hidden. |
-| AI and classroom coexistence | Stale disconnected activity flags no longer block model setup as though a presenter were collecting responses. Genuine live collection still takes priority over AI work. |
-| Word Cloud moderation | Hiding a word removes it from the presented cloud without deleting its original submission or credited stars. Reports and relevant Excel exports mark it **Hidden from cloud**. |
-| Saved report images | Report-owned response images and slide snapshots no longer expire merely because a session is old, inactive, or not favorited. Explicit reset/deletion can still remove media. |
-| Session star accuracy | Older report-detail views use the selected session's rewards rather than a student's accumulated class balance. Session totals and lifetime leaderboard totals remain separate. |
-| Windows installation | One main **LOKAL Setup** entry in Installed Apps, with supporting components managed by the combined installer. |
+| Cloud synchronization | Account-bound enrollment, installation-specific record mapping, required-parent handling, acknowledged batches, safer retries, deletion markers, and managed classroom-image transfer. Queued changes are retained when delivery fails. |
+| Online classroom relay | Classroom events use ownership-checked, translated identities. v1.0.225 adds the missing leaderboard open/close events so the online path can carry the same presenter commands as LAN delivery. |
+| Public website | Refreshed Download, Help, Privacy and Terms pages, responsive layouts, an icon-only mobile hamburger and a side navigation drawer. |
+| Google sign-in | Narrow security-policy permissions for Google's sign-in stylesheet and profile photos. The hosted administrator must still authorize the correct origin in Google Cloud. |
+| Browser AI summaries — experimental | Replaces the report page's native AI execution path with self-hosted Transformers.js and ONNX Runtime Web. Separate, verified Qwen2.5 1.5B q4 ONNX model pack; no model weights inside the installer. |
+| AI setup experience | Explicit CPU, GPU and Automatic choices, visible loading/error states, a bounded startup check, cancellation and clearer model-storage guidance. Improved spacing for notes and descriptions. |
+| Hosted/local settings | Hosted Settings keeps computer enrollment and connected-device management but hides local network-mode controls and Local AI Summary. The local installation retains those features, even when connected to the internet. |
+| Settings cleanup | Notifications removed from both local and hosted Settings. Old links to removed/unsupported tabs return to Connection. |
 
-**Current documented build:** Setup **1.0.221.0** · Server **1.0.163.0** · PowerPoint add-in **1.0.182.0** · Server Status **1.0.99.0**.
+**Current build:** Setup **1.0.225.0** · Server **1.0.167.0** · PowerPoint add-in **1.0.186.0** · Server Status **1.0.103.0**.
 
-Build/package checks and synthetic classroom/UI regressions passed for this build. That is **not** a claim of error-free operation, universal model support, dedicated-GPU validation, or completed real-model AI acceptance. Check the [release notes](https://github.com/ke1thdev/LOKAL-Downloads/releases) and pilot the update on your own hardware before relying on it in class.
+**Release date:** 20 October 2026.
+
+Automated server, workflow and packaging checks passed. Actual browser/GPU AI execution and a live hosted quiz/leaderboard rehearsal remain acceptance checks; these results do not establish universal hardware compatibility or error-free operation.
 
 ## Features at a glance
 
@@ -87,22 +89,39 @@ Build/package checks and synthetic classroom/UI regressions passed for this buil
 | Presentation tools | Annotate with pen, highlighter, shapes, and text; add whiteboards and move configured draggable objects. |
 | Teacher dashboard | Manage classes, participants, groups, activities, reports, account information, and settings. |
 | Reporting | Review session/activity details and download auto-scored, teacher-reviewed, complete, activity, and leaderboard Excel reports. |
-| Experimental local AI | Optionally generate a report recap on the Windows host using a compatible imported GGUF model; no cloud AI calls. |
+| Experimental local AI | Generate an optional report recap in the browser connected to your local classroom installation, using a verified ONNX model pack; no cloud AI calls. |
 | Local operation | Conduct classroom sessions over a reachable LAN without relying on a hosted server. |
 | Optional connected features | Use configured online access and local-to-cloud synchronization when suitable infrastructure and internet connectivity are available. |
 
 ## Downloads and requirements
 
-Download **LOKAL-Setup-x64.exe** from the [LOKAL release assets](https://github.com/ke1thdev/LOKAL-Downloads/releases).
+Download **LOKAL-Setup-x64.exe** from the [LOKAL release assets](https://github.com/ke1thdev/LOKAL-Downloads/releases). The [project download page](https://download.lokal.college/) also provides installer information; confirm its displayed version before downloading.
 
-For **v1.0.221**, AI writing acceptance remains pending. Treat it as an experimental release candidate, not a fully validated AI release. Ordinary classroom use does not require enabling AI or downloading a model.
+| Component | Version | Included in the Windows setup |
+|---|---|---|
+| LOKAL Setup | 1.0.225.0 | Combined installer. |
+| LOKAL Server | 1.0.167.0 | Classroom storage, browser pages, submissions and live updates. |
+| PowerPoint add-in | 1.0.186.0 | Ribbon, slide activities and presentation tools. |
+| Server Status | 1.0.103.0 | Local service controls, joining information and diagnostics. |
+| Prerequisites | As required | .NET Framework 4.8 and Visual Studio Tools for Office Runtime. |
 
-| Component | Included in the Windows setup |
-|---|---|
-| LOKAL server | Receives classroom submissions, stores records, serves the browser pages, and delivers live updates. |
-| PowerPoint add-in | Adds the LOKAL ribbon, slide activities, response windows, and presentation tools. |
-| Server Status application | Provides joining information, service controls, connection assistance, release checks, and diagnostic access. |
-| Installation prerequisites | .NET Framework 4.8 and the Visual Studio Tools for Office Runtime, installed when required. |
+**Installer file:** `LOKAL-Setup-x64.exe`  
+**Size:** 226,977,736 bytes  
+**SHA-256:**
+
+```text
+23A8053C5C000A99C50D80B34190076F7C9679A7CC36127166DC3B487A880ADE
+```
+
+To verify the downloaded file in PowerShell, run this from its download folder:
+
+```powershell
+Get-FileHash -Algorithm SHA256 -LiteralPath ".\LOKAL-Setup-x64.exe"
+```
+
+The result must match the checksum above. GitHub's automatic source-code ZIP/TAR assets are not the Windows installer.
+
+The optional AI model is a separate download, not an installation prerequisite. See [AI setup](#experimental-local-ai-summaries-windows).
 
 ### What you need
 
@@ -398,7 +417,7 @@ Celebrate participation with live ranking and level badges.
 | Current class rank | Stars earned in the current session. |
 | Total stars rank | Accumulated stars in that class across sessions. |
 
-The native leaderboard includes a podium, ranked participant rows, avatars, levels, live updates, and **Insert as slide**. Equal star totals share the displayed rank; response-time/name ordering can organize tied rows. While the teacher opens a live leaderboard, the selected view can also appear on connected student devices.
+The native leaderboard includes a podium, ranked participant rows, avatars, levels, live updates, and **Insert as slide**. Equal star totals share the displayed rank; response-time/name ordering can organize tied rows. While the teacher opens a live leaderboard, the selected view can also appear on connected student devices. v1.0.225 adds the missing open/close messages to the online relay; update both the classroom installation and hosted server for the online path. A live hosted rehearsal remains necessary.
 
 <details>
 <summary>View the leaderboard</summary>
@@ -631,14 +650,16 @@ This is a review library—not a browser-based slide or quiz builder. Prepare sl
 
 ### Settings
 
-| Functional area | Features |
-|---|---|
-| Connection | View/select the operating mode and joining/dashboard addresses; manage configured online/sync connection details. Listener changes may require a server restart. |
-| Star Levels | Edit star requirements, add/remove supported levels, and use supplied badge artwork. |
-| Whiteboard Backgrounds | Upload, preview, and remove supported custom backgrounds for the PowerPoint whiteboard picker. |
-| Local AI Summary — experimental, Windows only | Enable/disable AI for your teacher account, import/replace/remove a compatible model on the host, select a processing mode, and check the processor. See [setup and limitations](#experimental-local-ai-summaries-windows). |
+| Area | Local classroom installation | Hosted website |
+|---|---|---|
+| Connection | Configure Offline/Local Network/Online student access, view joining addresses and connect cloud backup. Listener changes may require a restart. | View public classroom addresses, generate enrollment codes and manage enrolled computers. No local network-mode picker. |
+| Star Levels | Edit supported level thresholds and badge artwork. | Manage supported classroom level settings. |
+| Whiteboard Backgrounds | Upload, preview and remove supported PowerPoint whiteboard backgrounds. | Manage supported background-library settings. |
+| Local AI Summary — experimental | Enable summaries, select a processor mode, import/remove the verified browser model pack and check the processor. | Hidden; the current hosted PostgreSQL service does not provide local AI generation. |
 
-The Notifications area is currently an **available-soon placeholder**, not an implemented notification-preference system.
+Notifications is no longer shown in either version. Direct links to removed or unsupported tabs return to Connection.
+
+“Local” identifies the installed classroom server; it does **not** mean the laptop must be disconnected from the internet. A local installation can use cloud backup while retaining its local tools.
 
 <details>
 <summary>View Connection, Star Levels, and Whiteboard Backgrounds</summary>
@@ -648,6 +669,8 @@ The Notifications area is currently an **available-soon placeholder**, not an im
 ![Star Levels settings](docs/screenshots/web/settings-star-levels.png)
 
 ![Whiteboard Backgrounds settings](docs/screenshots/web/settings-whiteboards.png)
+
+*Earlier interface captures; the hosted/local visibility rules above describe v1.0.225.*
 
 </details>
 
@@ -698,57 +721,64 @@ Manual review supports opening words, full text, and images. Names hidden in a p
 
 ### Experimental local AI summaries (Windows)
 
-An optional **AI Summary** card sits below the Class Report statistics and above Activities. It can turn the recorded session figures into a friendly, conversational recap, with the model choosing its wording, order, and one-to-six-paragraph arrangement. Tone, detail, accuracy, and usefulness vary by model; a ClassPoint-identical result or successful generation is not guaranteed.
+The optional **AI Summary** card writes a recap from a saved Class Report's recorded statistics. In v1.0.225, execution runs in the **browser viewing the local teacher dashboard**, using self-hosted **Transformers.js 4.3.1** and **ONNX Runtime Web**. It does not call an external AI service.
 
 > [!IMPORTANT]
-> **Experimental, not fully validated across devices.** Bugs, compatibility failures, slow processing, timeouts, rejected drafts, and incorrect wording remain possible. Current-runner Windows-service AI acceptance and dedicated-GPU testing remain incomplete. Keep AI disabled if it does not work reliably on your computer. It is not an assessment engine, attendance tracker, or substitute for teacher review.
+> AI remains experimental. Actual browser/WASM/WebGPU execution and device compatibility require real-device testing. Loading may be slow, memory may be insufficient, and generated prose may be rejected or contain mistakes. AI is not an assessment engine, attendance tracker or substitute for teacher review.
 
 #### Enable and try it
 
-1. On the **computer hosting LOKAL**, sign in to the teacher page through its localhost address.
-2. Open **Settings → Local AI Summary** and enable it for your teacher account. It is **off by default**.
-3. Download a self-contained, instruction-tuned GGUF text-generation model yourself. Review its publisher, license, hardware needs, and chat-template support. Start small; a larger model is not automatically a better fit for your laptop.
-4. Close all quiz submissions, then use **Upload model**. The selected filename is information, not the upload button. Progress reflects the actual file size; file verification and processor preparation follow separately.
-5. Choose **Automatic**, **CPU only**, or **GPU only**, save the preference, and use **Check processor** if prompted. A check loads the model/context and evaluates a short synthetic input—it **does not generate a sample report**.
-6. Open a saved Class Report and select **Generate summary**. Actual writing and factual/format checks happen here. Use Cancel, Retry, or Regenerate as appropriate, and review the result against the official report.
+1. Update LOKAL, then open the local teacher dashboard through **localhost/127.0.0.1 or HTTPS**.
+2. Open **Settings → Local AI Summary** and enable summaries for your account.
+3. Download the separate [LOKAL browser model pack](https://download.lokal.college/LOKAL-AI-Qwen2.5-1.5B-q4.lokalmodel), or copy that same file from a trusted computer by USB.
+4. Select **Import model pack**. LOKAL verifies the files before activating the new browser copy.
+5. Choose **Automatic**, **CPU only** or **GPU only**, save the preference and select **Check processor**.
+6. Close quiz submissions, open a saved Class Report and choose **Generate summary**. Keep the page open; use Cancel when needed. Review the result against the report.
 
-No summary is generated automatically. Import, replacement, removal, and processor checks require an authenticated **direct-localhost** session on the host; signing in from another device does not grant model-management access. Once configured, authorized teacher devices can request a summary, but computation still runs on the host, not the phone viewing the report. Local AI currently requires the Windows host's **local SQLite storage** and is unavailable on Linux or a Windows server using a hosted PostgreSQL database.
+The current model is **Qwen2.5 1.5B Instruct**, quantized ONNX, under **Apache-2.0**. The pack is approximately **1.7 GiB**; the device needs additional working memory and browser storage. File size alone does not prove that inference will fit.
 
-#### Model files and replacement
+**Model file:** `LOKAL-AI-Qwen2.5-1.5B-q4.lokalmodel`  
+**SHA-256:**
 
-- **Compatible GGUF does not mean any LLM.** Gemma, Llama, Qwen, and other text-generation families are not blocked just because of their names, but each exact file must be supported by the bundled runtime, include a usable embedded chat template, fit memory limits, and pass the isolated load check. Passing that check does not guarantee a valid summary.
-- Import accepts one complete `.gguf` file up to **64 GiB**. This is an upload ceiling, **not** a recommended model size or a promise your device can run it. Split models, external adapters/templates, vision projectors, embedding-only models, and unsupported architectures are not accepted.
-- Keep enough disk space for the staged upload while retaining the working model, plus at least **1 GiB free-space reserve**. RAM and GPU memory are checked separately; model-file size alone does not establish that it will fit.
-- A successful replacement switches your model reference, then reclaims the previous **managed copy** only when no other teacher references it. Failed replacement preserves the previous selection. Remove model also respects shared references. LOKAL does **not** delete the original downloaded file you selected.
-- Previously imported models may need a new **Check processor**, rather than another upload, after a runtime update.
+```text
+69E6E0183586DAF59CD94A3FCAD3737E8CC39F59AE359CE9B5A10C5B0F57C772
+```
+
+#### Model storage and older GGUF files
+
+- The browser engine accepts the exact verified **.lokalmodel** pack, not arbitrary GGUF or ONNX files.
+- Older GGUF imports are preserved, but are not converted and cannot be used by the new browser engine.
+- Import is separate for each browser/profile/site origin. Clearing browser site data removes the cached model, not server-stored reports.
+- The browser can evict cached data when storage is low. Keep the source pack for reimport; persistent-storage permission is not guaranteed.
+- A failed replacement keeps the previous activated model. Removing the browser model does not delete the original pack or classroom reports.
+- Ordinary HTTP LAN addresses do not provide the secure browser context required for model storage. Use localhost/127.0.0.1 or appropriately configured HTTPS.
+- After importing the model, local inference does not require an external AI provider or an internet connection, provided the browser can reach the local LOKAL server.
 
 #### CPU and experimental GPU processing
 
 | Mode | Behavior |
 |---|---|
-| Automatic | Prefers a locally checked compatible Vulkan GPU; may use a checked CPU path when GPU execution is unavailable. Only eligible GPU-device failures permit a bounded CPU fallback. |
-| CPU only | No GPU offload. Speed depends on the host CPU, available RAM, model, and other work on that computer. |
-| GPU only — experimental | Requires a successful local Vulkan/offload check. Does not silently switch to CPU. Drivers and available memory can prevent execution. |
+| Automatic | Attempts WebGPU model loading first; may fall back to CPU/WASM if GPU loading fails. |
+| CPU only | Uses WebAssembly on the device running this browser. Performance depends on CPU, memory, browser and other work. |
+| GPU only — experimental | Requires a compatible WebGPU browser, driver and sufficient resources. Never silently switches to CPU. |
 
-GPU detection is not proof of compatibility. Dedicated-GPU behavior has **not been verified on dedicated hardware** for this build, and no measured GPU speedup or universal NVIDIA/AMD/Intel support is promised. Hardware/setup messages belong in **Settings**, not a large processor panel in Reports. A completed recap retains compact information about the model/backend actually used and its generation date in **Philippine Standard Time**.
+A gaming laptop or detected GPU does not guarantee compatibility. No universal GPU support or measured browser speedup is promised.
 
-#### Report data, privacy, and classroom priority
+A short first-load delay can depend on the laptop and browser. Settings now displays loading and error states; browser-worker status startup has a **30-second timeout**. Generation has a **five-minute deadline**, including model initialization. Leaving the page or cancelling stops that browser's work.
 
-The model receives a minimized set of recorded report totals: saved responses, recorded activities/contributors, activity-type counts and response ranges, applicable correctness figures, net reward-source totals, and up to five eligible reward leaders' names with rank/tie context. Names can be personal data even when processed locally; use the feature only under your institution's data-handling rules.
+The hosted PostgreSQL website does not expose Local AI Summary. The feature requires the local SQLite classroom installation; signing in online does not make the hosted service run a model.
 
-Raw answers, questions, uploaded images, captions, emails, credentials, and participant-device information are **not** provided. The worker runs locally in a restricted, zero-network Windows environment without database access. The installer includes the runtime, **not model weights**; LOKAL does not automatically download a model or call cloud AI services. These safeguards reduce risk; they are not a security certification of arbitrary downloaded files.
+#### Data, validation and classroom priority
 
-Only one AI operation runs at a time, with bounded resources and a **five-minute deadline**. Open submissions block AI work; starting or reopening a quiz cancels unfinished AI generation so classroom work takes priority. Durable flags left by a disconnected presenter are not treated as proof of live collection. You do not need to close PowerPoint merely to configure AI if no activity is genuinely collecting responses.
+The model receives minimized report evidence: recorded response/activity/contributor counts, applicable correctness and reward figures, and eligible reward leaders' names with rank/tie context. Names remain personal data even during local processing.
 
-#### Read results and errors correctly
+Raw answers, questions, images, emails, passwords and device credentials are not passed to the model. The browser worker cannot fetch arbitrary external models or classroom APIs. Runtime files are self-hosted, and model integrity is checked before use.
 
-LOKAL checks generated structure and detectable mistakes in numbers, names, ranks, ties, and reward claims before saving. A model can pass the load check yet produce a rejected draft. Rejection is **not** proof of broken hardware, and a successful check is **not** proof that its writing is accurate. The **v1.0.221** status fix keeps the latest safe failure visible instead of silently reverting to “Summary needs updating.”
+The server controls authorization, classroom ownership, generation leases and factual validation. It rejects client-supplied report facts and checks generated text before saving. There is at most one corrective retry. Rejected prose does not replace a previous valid recap, and AI never changes answer records or assessment figures.
 
-Summaries become outdated when relevant report data or AI configuration changes. Outdated prose stays hidden and can be regenerated. If a previous recap is still current, a failed regeneration leaves that valid recap available with the new error; a rejected draft does not replace it. Disabling AI cancels your unfinished job while retaining the model reference and saved recaps.
+Live collection takes priority; the server invalidates unfinished work when collection starts, and the browser stops on its next lease check. Saved summaries become outdated when relevant report data/configuration changes. They remain local and are not included in Excel exports or cloud synchronization.
 
-AI prose can still contain errors or awkward wording. Stars are rewards, not automatically correctness scores; students with recorded responses **or** awards are not a verified attendance list. The report's official figures remain authoritative. Summaries are saved separately from assessment records, remain local, and are **not included in Excel exports or cloud synchronization**.
-
-Every displayed recap includes: **“AI-generated from recorded report data. Review against the report.”**
+A processor check confirms loading, not writing accuracy. Real-model Node CPU testing passed a synthetic recap through the server validator, but does **not** establish actual browser or GPU acceptance. Always review AI prose against the official report.
 
 ### Excel and CSV downloads
 
@@ -817,7 +847,23 @@ The Windows Server Status app is the teacher's local service companion. Use it t
 
 **Offline-first classroom use means Local Network mode without internet—not that devices can communicate with no network at all.** LOKAL does not create a Wi-Fi hotspot. Guest Wi-Fi/client isolation, firewall restrictions, changing LAN addresses, or weak signal can prevent joining or submissions.
 
-Cloud synchronization is opt-in **local-to-cloud** operation. Do not assume automatic bidirectional conflict resolution or that a hosted service is always available. Hosted access, Google sign-in, and synchronization depend on their configured infrastructure.
+Cloud synchronization is opt-in **local-to-cloud** operation. Since v1.0.221, the enrollment and relay paths now bind the selected local teacher to an authenticated hosted account and translate record identities per installation. Failed or unacknowledged batches remain queued.
+
+To connect a classroom computer, generate a fresh one-time code in the hosted **Settings → Connection** page, then enter it on the local installation. The hosted page also lists enrolled computers. Update both sides before moving older classroom installations to the new enrollment protocol.
+
+Do not assume automatic bidirectional conflict resolution or that a hosted service is always available. Hosted access, Google sign-in, and synchronization depend on their configured infrastructure. Do not clear the outbox, remove database constraints or delete accounts to hide a conflict; preserve the data and seek support.
+
+### Updating from v1.0.221
+
+1. Back up important classroom data before updating.
+2. Save open presentations and close PowerPoint.
+3. Install **LOKAL-Setup-x64.exe v1.0.225.0**.
+4. Have the hosted administrator update the VPS to the matching server release before testing cloud synchronization or online quizzes.
+5. Re-enroll older unbound connections with a fresh code when moving to the new protocol. Keep local records and queued changes intact.
+6. Test a local lesson, then an online lesson with leaderboard open/close.
+7. If using AI, import the new browser model pack; an older GGUF file is not sufficient.
+
+The Download, Help, Privacy and Terms pages have refreshed responsive layouts and mobile drawer navigation. Google sign-in still requires the hosted administrator to configure the exact authorized origin; security-policy fixes cannot replace that Google Console setting.
 
 Local plain-HTTP classroom traffic is not encrypted end to end. Use trusted networks and appropriately configured HTTPS for hosted access. Do not expose the local port directly to the public internet or publicly share account tokens.
 
@@ -892,7 +938,7 @@ Capacity depends on the teacher computer, network quality, activity type, image 
 <details>
 <summary>Do I need an AI model to use LOKAL?</summary>
 
-No. AI is an optional, experimental Windows feature and is off by default. You can run quizzes, award stars, review reports, and export Excel files without importing a model. To try AI, use Settings on the host computer and start with a small compatible GGUF; see the experimental AI section above.
+No. AI is optional and experimental. You can run quizzes, award stars, review reports and export Excel files without a model. To try summaries on the local classroom installation, import the verified .lokalmodel browser pack through Settings; see the experimental AI section above.
 
 </details>
 
@@ -912,9 +958,9 @@ For non-sensitive bugs, [open a LOKAL issue](https://github.com/ke1thdev/LOKAL-D
 - Expected behavior and what actually happened.
 - A fictional/anonymized example or screenshot.
 
-For an AI issue, also include the model's public filename/source, selected processing mode, available RAM, GPU/driver if relevant, elapsed time, and the safe error code shown by LOKAL. Do not post the generated recap if it contains student names or other private data. Hardware details help diagnose an issue; they are not sent to the summary model as report content.
+For an AI issue, also include the model pack filename, browser/version, selected processing mode, available RAM, GPU/driver if relevant, elapsed time, and the safe error shown by LOKAL. Do not post the generated recap if it contains student names or other private data. Hardware details help diagnose an issue; they are not sent to the summary model as report content.
 
-Do not upload real student reports, databases, private diagnostics, recovery codes, tokens, passwords, or private keys. Use an established private channel for sensitive security reports; do not publish exploit details or credentials in a public issue.
+Do not upload real student reports, databases, private diagnostics, recovery codes, tokens, passwords, or private keys. For account, privacy or sensitive support requests, contact [contactus@lokal.college](mailto:contactus@lokal.college). Do not publish exploit details or credentials in a public issue.
 
 ## Privacy and responsible use
 
